@@ -1,0 +1,37 @@
+Aqui está um algoritmo de ordenação Bubble Sort em C bem documentado:
+
+```c
+#include <stdio.h>
+
+// Função para imprimir um array
+void imprimirArray(int arr[], int tamanho) {
+    int i;
+    for (i = 0; i < tamanho; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+// Função para implementar o Bubble Sort
+void bubbleSort(int arr[], int tamanho) {
+    int i, j, temp;
+    // O loop externo percorre todo o array
+    for (i = 0; i < tamanho-1; i++) {
+        // O loop interno compara adjacentes e troca se necessário
+        for (j = 0; j < tamanho-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+                // Troca arr[j] e arr[j+1]
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}
+
+// Função principal para testar o Bubble Sort
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int tamanho = sizeof(arr)/sizeof(arr[0]);
+    printf("Array original: \n");
+    imprimir

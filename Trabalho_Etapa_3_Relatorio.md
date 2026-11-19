@@ -72,11 +72,11 @@ Para comparar as configurações, o programa permite executar o mesmo prompt té
 
 | Cenário | Temperatura | Comportamento esperado | Registro desta execução |
 |---|---:|---|---|
-| A | 0.0 | Resposta mais previsível; adequada para observar uma solução técnica direta. | Não executado: Ollama não está instalado/disponível neste ambiente. |
-| B | 0.9 | Mais variação de formulação e escolhas, mantendo normalmente coerência. | Não executado: Ollama não está instalado/disponível neste ambiente. |
-| C | 1.5 | Maior aleatoriedade; aumenta a chance de respostas inconsistentes, erros ou desvios. | Não executado: Ollama não está instalado/disponível neste ambiente. |
+| A | 0.0 | Resposta mais previsível; adequada para observar uma solução técnica direta. | Gerou uma implementação direta com funções para ordenar e imprimir o vetor. A saída atingiu o limite de 300 tokens no meio da chamada `imprimir`. |
+| B | 0.9 | Mais variação de formulação e escolhas, mantendo normalmente coerência. | Incluiu contadores de comparações e trocas e uma saída antecipada quando não há trocas. A saída atingiu 300 tokens antes de terminar o programa. |
+| C | 1.5 | Maior aleatoriedade; aumenta a chance de respostas inconsistentes, erros ou desvios. | Usou uma função auxiliar de troca e uma estrutura diferente para ordenar e imprimir. A resposta permaneceu coerente, mas atingiu 300 tokens no meio da inicialização do vetor. |
 
-Esses comportamentos são expectativas qualitativas, não resultados medidos. Para completar o registro experimental, execute o script no computador com Ollama e compare os três arquivos gerados. A temperatura, isoladamente, não faz o modelo “entrar em caos” de forma garantida; a resposta concreta também depende do modelo, prompt, `top_p`, seed e implementação de amostragem.
+O experimento foi executado localmente em 19/11/2026 com o modelo `qwen2.5-coder:7b`, `top_p=0.9` e `num_predict=300`, mantendo o mesmo prompt nos três cenários. As três respostas produziram abordagens diferentes e coerentes para o Bubble Sort; neste teste, a temperatura 1.5 não causou colapso sintático. Como todas as gerações chegaram ao limite de 300 tokens, nenhum dos trechos contém um programa completo. Isso limita a comparação da correção do código, mas não impede observar as diferenças de formulação e estrutura. A temperatura, isoladamente, não garante “caos”; a resposta também depende do modelo, prompt, `top_p`, seed e implementação de amostragem.
 
 ### 3–4. Integração Python, streaming e salvamento
 
@@ -93,7 +93,7 @@ O segundo comando cria `experimento_temp_0.0.txt`, `experimento_temp_0.9.txt` e 
 
 ## Conclusão
 
-As RNNs processam cada sequência com dependências entre passos, enquanto os Transformers permitem calcular as relações de atenção entre posições em paralelo durante o treinamento. A atenção Q/K/V fornece um mecanismo para ponderar informação contextual; pré-treinamento, SFT e alinhamento por preferências cumprem papéis distintos na construção de um assistente. O script implementa a integração local pedida e automatiza a comparação entre temperaturas. Neste ambiente, porém, não foi possível executar inferências nem registrar saídas reais porque o comando `ollama` não está disponível; os resultados práticos devem ser preenchidos após a execução local.
+As RNNs processam cada sequência com dependências entre passos, enquanto os Transformers permitem calcular as relações de atenção entre posições em paralelo durante o treinamento. A atenção Q/K/V fornece um mecanismo para ponderar informação contextual; pré-treinamento, SFT e alinhamento por preferências cumprem papéis distintos na construção de um assistente. O script implementa a integração local pedida e automatiza a comparação entre temperaturas. O experimento foi executado com três temperaturas, e as respostas foram salvas nos arquivos de saída. Os resultados mostram variações estruturais sem o colapso esperado no cenário de temperatura 1.5; o limite configurado, porém, interrompeu todos os códigos antes de sua conclusão.
 
 ## Referências
 
