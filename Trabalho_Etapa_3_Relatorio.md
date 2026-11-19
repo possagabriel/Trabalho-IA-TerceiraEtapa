@@ -5,7 +5,7 @@
 **Disciplina:** Inteligência Artificial  
 **Professor:** Felipe Roncalli de Paula Carneiro  
 **Data indicada no enunciado:** 12/11/2026  
-**Aluno(a):** ____________________________________
+**Aluno(a):** Gabriel Possa
 
 ## Introdução
 
