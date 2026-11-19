@@ -80,12 +80,12 @@ O experimento foi executado localmente em 19/11/2026 com o modelo `qwen2.5-coder
 
 ### 3–4. Integração Python, streaming e salvamento
 
-O arquivo [`ollama_stream.py`](ollama_stream.py) envia uma requisição em streaming, imprime os fragmentos à medida que chegam e salva o texto completo em arquivo. Os parâmetros de temperatura, `top_p` e `num_predict` podem ser alterados pela linha de comando. Com `--experimento`, são feitas três chamadas com o mesmo prompt e temperaturas 0.0, 0.9 e 1.5; cada saída recebe um arquivo próprio. A implementação trata erros de conexão e respostas HTTP inválidas.
+O arquivo [`ollama_stream.py`](ollama_stream.py) envia uma requisição em streaming, imprime os fragmentos à medida que chegam e salva o texto completo em arquivo. Os parâmetros de temperatura, `top_p`, `num_predict`, endpoint e tempo limite podem ser alterados pela linha de comando. O padrão de `num_predict` foi elevado para 600 para reduzir cortes em respostas mais longas. Com `--experimento`, são feitas três chamadas com o mesmo prompt e temperaturas 0.0, 0.9 e 1.5; cada saída recebe um arquivo próprio. A implementação trata erros de conexão, tempo limite e respostas HTTP inválidas, e informa o motivo do término quando o servidor o fornece.
 
 Comandos de exemplo:
 
 ```bash
-python ollama_stream.py --temperature 0.0 --top-p 0.9 --num-predict 300 --output resposta.txt
+python ollama_stream.py --temperature 0.0 --top-p 0.9 --num-predict 600 --output resposta.txt
 python ollama_stream.py --experimento --top-p 0.9 --num-predict 300
 ```
 
