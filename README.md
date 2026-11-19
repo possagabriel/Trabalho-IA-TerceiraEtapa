@@ -52,4 +52,4 @@ Os parâmetros `--model`, `--prompt`, `--url`, `--timeout` e `--output` podem se
 
 ## Resultados
 
-Os resultados registrados usam `qwen2.5-coder:7b`, `top_p=0.9` e `num_predict=300`. As três gerações terminaram no limite configurado; por isso os exemplos de código estão incompletos. O relatório descreve as diferenças observadas sem atribuir à temperatura um efeito determinístico de “caos”.
+O modelo consultado com `ollama show` apresentou arquitetura `qwen2`, 7,6B parâmetros, contexto de 32.768 tokens e quantização `Q4_K_M`. A execução foi em CPU, segundo a saída do instalador. Os resultados registrados usam `qwen2.5-coder:7b`, `top_p=0.9` e `num_predict=300`. As três gerações terminaram no limite configurado; por isso os exemplos de código estão incompletos. O relatório descreve as diferenças observadas sem atribuir à temperatura um efeito determinístico de “caos”.

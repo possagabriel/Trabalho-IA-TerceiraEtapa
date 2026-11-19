@@ -64,7 +64,7 @@ em que \(QK^T\) produz os escores de compatibilidade entre consultas e chaves, \
 
 ### 1. Preparação com Ollama
 
-O script entregue usa o endpoint HTTP local `http://localhost:11434/api/generate` e o modelo padrão `qwen2.5-coder:7b`. O Ollama precisa estar instalado e ativo, e o modelo deve estar disponível localmente (por exemplo, após `ollama pull qwen2.5-coder:7b`). Com o serviço iniciado, a inferência é feita na máquina local. O formato e a quantização efetivamente utilizados dependem da distribuição do modelo instalada pelo Ollama; verifique a versão/modelo com `ollama list` e `ollama show qwen2.5-coder:7b`.
+O script entregue usa o endpoint HTTP local `http://localhost:11434/api/generate` e o modelo `qwen2.5-coder:7b`, baixado e executado localmente com Ollama. A consulta `ollama show qwen2.5-coder:7b` registrou arquitetura `qwen2`, 7,6 bilhões de parâmetros, contexto de 32.768 tokens e quantização `Q4_K_M`. O instalador informou que não detectou GPU compatível, portanto esta execução usou CPU. A quantização pode variar conforme a distribuição instalada; essas informações devem ser conferidas com `ollama show` no ambiente da execução.
 
 ### 2. Experimento com temperatura
 
