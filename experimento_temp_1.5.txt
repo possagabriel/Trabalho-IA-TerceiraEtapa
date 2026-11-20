@@ -1,39 +1,59 @@
-Aqui está um algoritmo de ordenação Bubble Sort em C bem documentado:
+Claro! Abaixo está um algoritmo de ordenação Bubble Sort em C, bem documentado:
+
+### Algoritmo Bubble Sort (Ordenação de Bolha)
+
+#### Funcionamento:
+
+O Bubble Sort é uma técnica simples de ordenação baseada no conceito de percolação. Basicamente ele compara cada par sequencial de itens consecutivos em uma lista e os coloca na ordem correta se eles estiverem fora de ordem. Ela continua this processo até que nenhum par sequencial de itens esteja fora de ordem, então toda lista estará sorteada. Porque o maior não "bolha" para o topo da lista após a Primeira passagem, isso explora a noção de ter o maior item em seu local correto a cada passagem.
+
+#### Implementação em C:
 
 ```c
 #include <stdio.h>
-#include <stdlib.h>
 
-// Função de troca de elementos
-void trocar(int *a, int *b) {
+/**
+ * Realiza a troca entre dois elementos da matriz.
+ */
+void troca(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-// Função de Bubble Sort
-void bubbleSort(int arr[], int n) {
-    int i, j;
-    // O algoritmo percorre a lista por n vezes
-    for (i = 0; i < n-1; i++) {
-        // O último i elementos já estão ordenados, então a comparação pode ser feita apenas até n-i-1
-        for (j = 0; j < n-i-1; j++) {
-            // Se o elemento encontrado for maior que o próximo, trocar os dois
-            if (arr[j] > arr[j+1]) {
-                trocar(&arr[j], &arr[j+1]);
+/**
+ * Realiza a impressão do array para melhorar visualisação da ordenação.
+ */
+void imprimeArray(int a[], int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+}
+
+/**
+ * Função Bubble Sort para ordenar os elementos pelo método de percolação.
+ */
+void bubbleSort(int a[], int tamanho) {
+    // Itera pelo tamanho total do array
+    for (int i = 0; i < tamanho - 1; i++) {
+        // Marca um flag de parcialmente ordenados como falso
+        for (int j = 0; j < tamanho - i - 1; j++) {
+            // Compara dois elementos adjacentes e realiza a troca entre eles, se estiverem fora de ordem
+            if (a[j] > a[j + 1]) {
+                troca('&a[j]');     // Usámos '&a[j]' em vez de 'a[j]. É apenas uma forma simplificar a descrição, na Realidade na maioria das linguagens, chamamos a troca de forma mais simples (trocando o índice direto)
+                troca(&a[j+1]);
             }
         }
     }
 }
 
-// Função para imprimir o array
-void imprimirArray(int arr[], int size) {
-    int i;
-    for (i=0; i < size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}
-
-// Função principal para testar o Bubble Sort
+// Exemplo de como a função principal funcionaria
 int main() {
-    int arr[] = {64, 34,
+    // Define uma sequência de valores unirands.
+    int lista[] = {5, 15, 2, 3};
+    // Calcula a quantidade de unidades na lista
+    int n = sizeof(lista) / sizeof(lista[0]);
+
+    // Cria um printf antes do Bubble Sort para mostrar a sequência inicial
+    printf("Desordenada: \n");
+   

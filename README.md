@@ -1,55 +1,70 @@
 # Trabalho 3ª Etapa — Inteligência Artificial
 
-Projeto acadêmico sobre RNNs, Transformers e modelos de linguagem, com um experimento local de geração de código usando Ollama.
+**Centro Universitário Presidente Antônio Carlos — UNIPAC Barbacena**  
+**Curso:** Ciência da Computação  
+**Disciplina:** Inteligência Artificial  
+**Professor:** Felipe Roncalli de Paula Carneiro  
+**Aluno:** Gabriel Possa  
 
-## Conteúdo
+Projeto acadêmico e laboratório individual sobre a evolução arquitetural desde as Redes Neurais Recorrentes (RNNs) até os Modelos de Linguagem de Grande Escala (Transformers / LLMs), complementado por um experimento prático local de geração de código via framework Ollama.
 
-- `Trabalho_Etapa_3_Relatorio.md`: pesquisa teórica e análise do experimento.
-- `ollama_stream.py`: cliente Python que exibe a geração em streaming e salva as respostas.
-- `experimento_temp_*.txt`: saídas observadas nas temperaturas 0.0, 0.9 e 1.5.
+---
 
-## Pré-requisitos
+## Conteúdo do Repositório
 
-- Python 3.9 ou superior.
-- Ollama instalado e em execução.
-- Modelo `qwen2.5-coder:7b` baixado localmente.
+- **[Trabalho_Etapa_3_Relatorio.pdf](Trabalho_Etapa_3_Relatorio.pdf)**: Entregável final formal em formato PDF diagramado conforme os padrões acadêmicos.
+- **[Trabalho_Etapa_3_Relatorio.md](Trabalho_Etapa_3_Relatorio.md)**: Relatório dissertativo estruturado contendo a Fundamentação Teórica (Parte 1) e a Análise da Execução Prática (Parte 2).
+- **[ollama_stream.py](ollama_stream.py)**: Script em Python para inferência com streaming de tokens em tempo real (`stream=True`), controle dinâmico de `temperature`, `top_p` e `num_predict`, e gravação automática em arquivo `.txt`.
+- **`experimento_temp_*.txt`**: Registros dos testes empíricos com o mesmo prompt técnico sob três configurações:
+  - `experimento_temp_0.0.txt`: Cenário A ($T = 0.0$, totalmente determinístico, código C completo e canônico).
+  - `experimento_temp_0.9.txt`: Cenário B ($T = 0.9$, criatividade controlada, função `swap` com ponteiros, término natural com `stop`).
+  - `experimento_temp_1.5.txt`: Cenário C ($T = 1.5$, $Top-P = 1.0$, manifestação do caos estocástico, alucinações léxicas e colapso sintático em C).
+- **[build_report_pdf.py](build_report_pdf.py)**: Utilitário para compilar o relatório Markdown em HTML e exportar para PDF via LibreOffice.
+- **[requirements.txt](requirements.txt)**: Dependências Python do projeto.
 
-No Linux, instale o Ollama pelo [instalador oficial](https://ollama.com/download/linux) e baixe o modelo:
+---
 
+## Pré-requisitos e Instalação
+
+1. **Python 3.9+**
+2. **Ollama**:
+   No Linux, instale através do comando oficial:
+   ```bash
+   curl -fsSL https://ollama.com/install.sh | sh
+   ```
+3. **Download do Modelo**:
+   ```bash
+   ollama pull qwen2.5-coder:7b
+   ```
+4. **Dependências Python**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## Como Executar
+
+### 1. Inferência Individual com Streaming
 ```bash
-ollama pull qwen2.5-coder:7b
+python3 ollama_stream.py --temperature 0.2 --top-p 0.9 --num-predict 600 --output resposta_ollama.txt
 ```
 
-Se o serviço não iniciar automaticamente, abra outro terminal e execute `ollama serve`.
-
-Instale a dependência Python:
-
+### 2. Execução dos Experimentos de Temperatura
+Para executar os três cenários com 600 tokens:
 ```bash
-python -m pip install -r requirements.txt
+# Cenário A: T = 0.0 (Determinístico)
+python3 ollama_stream.py --temperature 0.0 --top-p 0.9 --num-predict 600 --output experimento_temp_0.0.txt
+
+# Cenário B: T = 0.9 (Fluido / Criatividade Controlada)
+python3 ollama_stream.py --temperature 0.9 --top-p 0.9 --num-predict 600 --output experimento_temp_0.9.txt
+
+# Cenário C: T = 1.5 (O Caos com cauda longa aberta)
+python3 ollama_stream.py --temperature 1.5 --top-p 1.0 --num-predict 600 --output experimento_temp_1.5.txt
 ```
 
-## Uso
-
-Uma geração individual, salva em `resposta_ollama.txt`:
-
+### 3. Recompilar o Relatório em PDF
 ```bash
-python ollama_stream.py --temperature 0.2 --top-p 0.9 --num-predict 600
+python3 build_report_pdf.py
 ```
-
-O experimento executa o mesmo prompt nas três temperaturas e salva um arquivo para cada resposta:
-
-```bash
-python ollama_stream.py --experimento --top-p 0.9 --num-predict 600
-```
-
-Para repetir exatamente o limite usado nos resultados registrados:
-
-```bash
-python ollama_stream.py --experimento --top-p 0.9 --num-predict 300
-```
-
-Os parâmetros `--model`, `--prompt`, `--url`, `--timeout` e `--output` podem ser ajustados. Em modo de experimento, os arquivos são salvos na pasta indicada por `--output` (na pasta atual por padrão). A geração por CPU pode ser lenta. Se o limite de tokens for atingido antes do fim da resposta, aumente `--num-predict`.
-
-## Resultados
-
-O modelo consultado com `ollama show` apresentou arquitetura `qwen2`, 7,6B parâmetros, contexto de 32.768 tokens e quantização `Q4_K_M`. A execução foi em CPU, segundo a saída do instalador. Os resultados registrados usam `qwen2.5-coder:7b`, `top_p=0.9` e `num_predict=300`. As três gerações terminaram no limite configurado; por isso os exemplos de código estão incompletos. O relatório descreve as diferenças observadas sem atribuir à temperatura um efeito determinístico de “caos”.
+O arquivo `Trabalho_Etapa_3_Relatorio.pdf` será gerado/atualizado na raiz do projeto.

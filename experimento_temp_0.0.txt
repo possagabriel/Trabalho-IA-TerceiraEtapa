@@ -34,4 +34,31 @@ int main() {
     int arr[] = {64, 34, 25, 12, 22, 11, 90};
     int tamanho = sizeof(arr)/sizeof(arr[0]);
     printf("Array original: \n");
-    imprimir
+    imprimirArray(arr, tamanho);
+    bubbleSort(arr, tamanho);
+    printf("Array ordenado: \n");
+    imprimirArray(arr, tamanho);
+    return 0;
+}
+```
+
+### Explicação do Código:
+
+1. **Função `imprimirArray`**:
+   - Esta função recebe um array e seu tamanho como parâmetros e imprime todos os elementos do array.
+
+2. **Função `bubbleSort`**:
+   - Esta função implementa o algoritmo de Bubble Sort.
+   - O loop externo (`for (i = 0; i < tamanho-1; i++)`) percorre todo o array.
+   - O loop interno (`for (j = 0; j < tamanho-i-1; j++)`) compara adjacentes elementos e troca se necessário.
+   - Se um elemento é maior que o próximo, eles são trocados usando uma variável temporária (`temp`).
+
+3. **Função `main`**:
+   - Define um array de exemplo.
+   - Calcula o tamanho do array.
+   - Imprime o array original.
+   - Chama a função `bubbleSort` para ordenar o array.
+   - Imprime o array ordenado.
+
+### Como Funciona o Bubble Sort:
+- O Bubble Sort é um algoritmo de ordenação simples que funciona comparando pares adjacentes de elementos e trocando-os se estiverem na ordem errada

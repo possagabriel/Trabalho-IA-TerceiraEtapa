@@ -1,40 +1,50 @@
-Aqui está um algoritmo de ordenação Bubble Sort em C bem documentado:
-
 ```c
+// Bubble Sort em C
+
 #include <stdio.h>
 
-// Função que implementa o Bubble Sort
+// Função para trocar dois elementos
+void swap(int *xp, int *yp) {
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+
+// Função principal do Bubble Sort
 void bubbleSort(int arr[], int n) {
-    int i, j, temp;
-    int trocas = 0, comparações = 0;
-
-    // Exibir informações iniciais
-    printf("Bubble Sort em andamento...\n");
-    printf("Tamanho do vetor: %d\n", n);
-
-    // Loop externo, controla o número de passos
+    int i, j;
+    // Percorre toda a array
     for (i = 0; i < n-1; i++) {
-        // Flag para indicar se houve trocas
-        int houveTroca = 0;
-
-        // Loop interno, compara adjacentes e ordena
+        // Últimos i elementos já estão em ordem
         for (j = 0; j < n-i-1; j++) {
-            comparações++;
-
-            // Se o elemento atual for maior que o próximo, troca-os
+            // Se o elemento encontrado é maior que o próximo
             if (arr[j] > arr[j+1]) {
-                temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
-                houveTroca = 1;
-                trocas++;
+                // Troca os dois
+                swap(&arr[j], &arr[j+1]);
             }
         }
-
-        // Se não houve trocas nesta passagem, o vetor já está ordenado
-        if (!houveTroca) {
-            break;
-        }
     }
+}
 
-   
+// Função para imprimir um array
+void printArray(int arr[], int size) {
+    int i;
+    for (i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+// Função principal do programa
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    printf("Array original: \n");
+    printArray(arr, n);
+    bubbleSort(arr, n);
+    printf("Array ordenado: \n");
+    printArray(arr, n);
+    return 0;
+}
+```
+
+Este é um exemplo simples de implementação do Bubble Sort em C. O código contém um bloco de comentários para cada função e a lógica de comparação e troca dentro do loop. A função `printArray()` é usada para exibir a array antes e depois da ordenação.
